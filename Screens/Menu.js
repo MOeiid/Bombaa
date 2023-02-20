@@ -1,12 +1,12 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Home from "./Home";
 import CarList from "./CarList";
-import credit from "./Credit";
+import Credit from "./Credit";
 import Branches from "./Branches";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { ImageBackground } from "react-native";
+import Credit from "./Credit";
 
 const Drawer = createDrawerNavigator();
 
@@ -33,8 +33,8 @@ function Menu() {
           component={Branches}
           options={{
             drawerIcon: ({ focused }) => (
-              <FontAwesome5
-                name="autoprefixer"
+              <Image
+                source={require("../assets/images/image_icon_2.png")}
                 size={focused ? 25 : 20}
                 color={focused ? "#0080ff" : "#999999"}
               />
@@ -48,7 +48,7 @@ function Menu() {
           options={{
             drawerIcon: ({ focused }) => (
               <FontAwesome5
-                name="btc"
+                name="car-rear"
                 size={focused ? 25 : 20}
                 color={focused ? "#0080ff" : "#999999"}
               />
@@ -61,7 +61,7 @@ function Menu() {
           options={{
             drawerIcon: ({ focused }) => (
               <FontAwesome5
-                name="autoprefixer"
+                name="hand-holding-dollar"
                 size={focused ? 25 : 20}
                 color={focused ? "#0080ff" : "#999999"}
               />
@@ -74,7 +74,7 @@ function Menu() {
           options={{
             drawerIcon: ({ focused }) => (
               <FontAwesome5
-                name="autoprefixer"
+                name=""
                 size={focused ? 25 : 20}
                 color={focused ? "#0080ff" : "#999999"}
               />
