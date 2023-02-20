@@ -5,8 +5,11 @@ import CarList from "./CarList";
 import Menu from "./Menu";
 import Branches from "./Branches";
 import Credit from "./Credit";
-import Info from "./Info";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
+const Home = () => {
+  return k;
+};
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -62,7 +65,7 @@ function Home() {
       >
         <Tab.Screen name="Menu" component={Menu} />
         <Tab.Screen name="Credit" component={Credit} />
-        <Tab.Screen name="" component={Info} />
+        <Tab.Screen name="" component={Home} />
         <Tab.Screen name="Branches" component={Branches} />
         <Tab.Screen name="Cars List" component={CarList} />
       </Tab.Navigator>
