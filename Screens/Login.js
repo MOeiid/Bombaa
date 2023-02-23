@@ -1,76 +1,103 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
   TextInput,
-  Button,
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Link } from '@react-navigation/native';
+import { FontAwesome } from "@expo/vector-icons";
 import Background from "../Components/Background";
 import Colors from "../assets/Colors";
 
-export default function App() {
-  const [id, setID] = useState("");
-  const [password, setPassword] = useState("");
+export default function Login({ navigation }) {
+  const [username, onChangeUsername] = useState("");
+  const [password, onChangePassword] = useState("");
+  const [isFill, setIsFill] = useState(true);
+  useEffect(() => {
+    if (username && password) {
+      setIsFill(false)
+    } else {
+      setIsFill(true)
+    }
+  }, [username, password])
   return (
     <Background>
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.image_2}
-          source={require("../assets/images/GettingStartedscreen.png")}
-        >
-          {/* <Image
-          style={styles.image_3}
-          source={require("../assets/images/Group24669.png")}
-        /> */}
+      <ImageBackground
+        style={Styles.background}
+        source={require("../assets/images/GettingStartedscreen.png")}
+      >
+        <View style={Styles.container}>
           <StatusBar style="auto" />
-          <Text style={styles.text_1}>LOGIN</Text>
-          <Text style={styles.text_2}>Add your details to login</Text>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="User ID"
-              placeholderTextColor="#003f5c"
-              onChangeText={(id) => setID(id)}
+          <View style={Styles.logo_view}>
+            <Image
+              style={Styles.logo}
+              source={require("../assets/images/Group24669.png")}
             />
-            <View>
-              <Feather name="user" size={24} color={"black"} />
-            </View>
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Password."
-              placeholderTextColor="#003f5c"
-              secureTextEntry={true}
-              onChangeText={(password) => setPassword(password)}
+            <Image
+              style={Styles.logo_background}
+              source={require("../assets/images/logo-background.png")}
             />
-            <View>
-              <Feather name="lock" size={24} color={"black"} />
-            </View>
           </View>
-          <TouchableOpacity style={styles.loginBtn}>
-            <Text style={styles.loginText}>LOGIN</Text>
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>
-    </Background>
+          <View style={Styles.login_form}>
+            <Text style={Styles.text_1}>LOGIN</Text>
+            <Text style={Styles.text_2}>Add your details to login</Text>
+            <View style={Styles.inputView}>
+              <TextInput
+                style={Styles.TextInput}
+                placeholder="Username"
+                placeholderTextColor={Colors.PlaceHolderColor}
+                value={username}
+                onChangeText={onChangeUsername}
+                cursorColor='#ce2733'
+              />
+              <View>
+                <FontAwesome name="user" size={24} color={"black"} />
+              </View>
+            </View>
+            <View style={Styles.inputView}>
+              <TextInput
+                style={Styles.TextInput}
+                placeholder="Password..."
+                placeholderTextColor={Colors.PlaceHolderColor}
+                secureTextEntry={true}
+                value={password}
+                cursorColor='#ce2733'
+                onChangeText={onChangePassword}
+              />
+              <View>
+                <FontAwesome name="lock" size={24} color={"black"} />
+              </View>
+            </View>
+            <Text>Forget your <Text style={{color: 'blue'}} onPress={() => navigation.replace("HomeScreen")}>password</Text>?</Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: isFill ? "#ccc" : Colors.MainColor,
+                ...Styles.loginBtn
+              }}
+              disabled={isFill}
+              onPress={() => navigation.replace("HomeScreen")}>
+              <Text style={Styles.loginText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
+    </Background >
   );
 }
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     opacity: 1,
+    marginTop: 120
   },
-  image_2: {
+  background: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
@@ -78,53 +105,68 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  image_3: {
-    flex: 1,
-    flexDirection: "column",
+  login_form: {
     justifyContent: "center",
     alignItems: "center",
-    // resizeMode: "cover",
-    // padding: 10,
-    Width: "40%",
-    Height: "100%",
+    width: 339,
+    height: 338,
+    backgroundColor: '#ffffff',
+    borderRadius: 30,
+    paddingTop: 50,
   },
   text_1: {
-    fontSize: 50,
-    color: "black",
+    fontSize: 25,
+    color: "#313131",
+    fontWeight: 'bold'
   },
   text_2: {
-    fontSize: 20,
-    paddingTop: 10,
-    color: "#777",
+    fontSize: 14,
+    paddingBottom: 30,
+    color: "#7C7D7E",
+    fontWeight: '400'
   },
   inputView: {
-    backgroundColor: Colors.PlaceHolderColor,
+    backgroundColor: '#f2f2f2',
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
     borderRadius: 30,
-    width: "70%",
-    height: 45,
+    width: 307,
+    height: 56,
     marginBottom: 20,
-    alignItems: "center",
+    paddingRight: 20
   },
   TextInput: {
     height: 50,
     flex: 1,
     padding: 10,
     marginLeft: 20,
-    color: Colors.PlaceHolderColor,
   },
   loginBtn: {
-    width: "80%",
+    width: 307,
     borderRadius: 25,
-    height: 50,
+    height: 56,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: Colors.MainColor,
+    // backgroundColor: Colors.MainColor,
   },
   loginText: {
     color: "white",
   },
+  logo_view: {
+    marginBottom: 40,
+    paddingTop: 60
+  },
+  logo: {
+    width: 178.71,
+    height: 55.76,
+    zIndex: 99
+  },
+  logo_background: {
+    width: 79,
+    height: 79,
+    position: 'absolute',
+    top: 45,
+    left: 13
+  }
 });

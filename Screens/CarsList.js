@@ -2,11 +2,11 @@ import react from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Background from "../Components/Background";
 
-const Home = () => {
+const CarsList = () => {
     return (
         <Background>
             <View style={Styles.container}>
-                <Text>Home!</Text>
+                <Text>Cars List!</Text>
             </View>
         </Background>
     );
@@ -18,4 +18,4 @@ const Styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-export default Home;
+export default CarsList;
