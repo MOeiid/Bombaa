@@ -7,6 +7,8 @@ import CarsList from '../Screens/CarsList';
 import CreditScreen from '../Screens/CreditScreen';
 import Home from '../Screens/Home';
 import DrawerNavigation from './DrawerNavigation';
+import MyHeader from '../Components/header';
+import { getHeaderTitle } from '@react-navigation/elements';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,19 +16,13 @@ const Tabs = () => {
     const navigation = useNavigation();
     return (
         <Tab.Navigator
-            initialRouteName='Home'
+            initialRouteName='Home_Tab'
             screenOptions={{
-                // headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    // position: 'absolute',
-                    // bottom: 20,
-                    // left: 10,
-                    // right: 10,
                     elevation: 0,
                     backgroundColor: '#ffffff',
                     height: 80,
-                    // borderRadius: 15,
                 }
             }}
         >
@@ -58,6 +54,11 @@ const Tabs = () => {
                 }} />
             <Tab.Screen name="Credit" component={CreditScreen}
                 options={{
+                    header: ({ navigation, route, options }) => {
+                        const title = getHeaderTitle(options, route.name);
+                        return <MyHeader
+                            title={title} />;
+                    },
                     tabBarIcon: ({ focused }) => (
                         <View style={Styles.tapScreenView}>
                             <View style={Styles.iconView}>
@@ -74,10 +75,9 @@ const Tabs = () => {
                         </View>
                     )
                 }} />
-            <Tab.Screen name="Home" component={Home}
+            <Tab.Screen name="Home_Tab" component={Home}
                 options={{
                     headerShown: false,
-
                     tabBarIcon: ({ focused }) => (
                         <View>
                             <Image
@@ -119,6 +119,13 @@ const Tabs = () => {
                 }} />
             <Tab.Screen name="Branches" component={BranchesList}
                 options={{
+                    header: ({ navigation, route, options }) => {
+                        const title = getHeaderTitle(options, route.name);
+                        return <MyHeader
+                            title={title}
+                            imageRightPath={require('../assets/images/addCar.png')}
+                            imageLeftPath={require('../assets/images/filter-icon.png')} />;
+                    },
                     tabBarIcon: ({ focused }) => (
                         <View style={Styles.tapScreenView}>
                             <View
@@ -138,6 +145,13 @@ const Tabs = () => {
                 }} />
             <Tab.Screen name="Cars List" component={CarsList}
                 options={{
+                    header: ({ navigation, route, options }) => {
+                        const title = getHeaderTitle(options, route.name);
+                        return <MyHeader
+                            title={title}
+                            imageRightPath={require('../assets/images/addCar.png')}
+                            imageLeftPath={require('../assets/images/filter-icon.png')} />;
+                    },
                     tabBarIcon: ({ focused }) => (
                         <View style={Styles.tapScreenView} >
                             <View

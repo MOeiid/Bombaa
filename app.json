@@ -7,7 +7,7 @@
     "icon": "./assets/images/Group24669.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/MaskGroup4.png",
+      "image": "./assets/images/splashScreen.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
